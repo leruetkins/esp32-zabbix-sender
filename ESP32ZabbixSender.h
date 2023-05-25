@@ -8,7 +8,7 @@
 #endif
 
 #include <WiFi.h>
-#define ZABBIXMAXLEN 300 // max 256byte packet
+#define ZABBIXMAXLEN 300 // max 256-byte packet
 #define ZABBIXMAXITEM 50 // max 50 items
 #define ZABBIXTIMEOUT 1000 // 1000ms
 
@@ -18,6 +18,7 @@ public:
   void Init(IPAddress ZabbixServerAddr, uint16_t ZabbixServerPort, String ZabbixItemHostName);
   int Send(void);
   void ClearItem(void);
+  void AddItem(String key, int value);
   void AddItem(String key, float value);
   void AddItem(String key, String value);
 

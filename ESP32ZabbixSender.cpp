@@ -41,6 +41,12 @@ void ESP32ZabbixSender::ClearItem(void) { // Clear item list
   zabbixItemSize = 0;
 }
 
+void ESP32ZabbixSender::AddItem(String key, int value) {
+  zabbixItemList[zabbixItemSize].key = key;
+  zabbixItemList[zabbixItemSize].val = String(value);
+  zabbixItemSize++;
+}
+
 void ESP32ZabbixSender::AddItem(String key, float value) {
   zabbixItemList[zabbixItemSize].key = key;
   zabbixItemList[zabbixItemSize].val = String(value);
@@ -55,7 +61,6 @@ void ESP32ZabbixSender::AddItem(String key, String value) {
 
 int ESP32ZabbixSender::createZabbixPacket(void) { // [private] create ZabbixPacket
   int packetLen = 0;
-  char s[16];
   String Json = "{\"request\":\"sender data\",\"data\":[";
   for (int i = 0; i < zabbixItemSize; i++) {
     if (i > 0) {
